@@ -8,9 +8,9 @@ class Country(models.Model):
         return self.name
     
 
-class Country(models.Model):
+class City(models.Model):
     name = models.CharField(max_length=255)
-    code = models.CharField('Country', on_deleye=models.CASCADE, related_name='citties' )
+    country = models.ForeignKey('Country', on_delete=models.CASCADE, related_name='cities')
 
     def __str__(self):
         return self.name

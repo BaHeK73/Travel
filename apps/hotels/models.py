@@ -4,7 +4,7 @@ from apps.common.models import City
 # Create your models here.
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
-    citu = models.ForeignKey('City', on_delete=models.CASCADE, related_name='hotels')
+    city = models.ForeignKey('common.City', on_delete=models.CASCADE, related_name='hotels')
     address = models.CharField(max_length=700)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='hotels', null=True, blank=True)
@@ -21,7 +21,7 @@ class Amenity(models.Model):
 class Room(models.Model):
     hotel = models.ForeignKey('Hotel', on_delete=models.CASCADE, related_name='rooms')
     room_type = models.ManyToManyField('RoomType', blank=True)
-    price_per_night = models.DecimalField(max_digits=0, decimal_places=2)
+    price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='rooms/', null=True, blank=True)
     capacity = models.IntegerField(default=2)
     is_available = models.BooleanField(default=True)
