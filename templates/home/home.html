@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Сервис путешествий{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+
+{% block content %}
+<section class="bg-cover bg-center min-h-screen flex flex-col justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');">
+    <div class="bg-white bg-opacity-80 rounded-xl p-8 shadow-lg max-w-2xl text-center mt-24">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Helping Others <br><span class="text-blue-600">LIVE & TRAVEL</span></h1>
+        <p class="text-lg mb-6">Special offers to suit your plan</p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center mb-6">
+            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Find Flight</a>
+            <a href="#" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">Find Stays</a>
+        </div>
+        <form class="bg-white bg-opacity-90 rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow">
+            <input type="text" placeholder="From - To" class="border rounded px-4 py-2 flex-1" />
+            <input type="date" class="border rounded px-4 py-2 flex-1" />
+            <input type="date" class="border rounded px-4 py-2 flex-1" />
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Search</button>
+        </form>
+    </div>
+</section>
+
+<!-- Destinations Section -->
+<section class="bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold mb-1">Plan your perfect trip</h2>
+                <p class="text-gray-500">Search Flights & Places Hire to our most popular destinations</p>
+            </div>
+            <button class="border px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100">See more places</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for city in popular_cities %}
+            <div class="bg-white rounded-xl shadow p-4 flex flex-col items-center">
+                <img src="{{ city.img_url|default:'https://placehold.co/96x96?text='|add:city.name|slice:':2' }}" alt="{{ city.name }}" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <div class="font-semibold">{{ city.name }}, {{ city.country.name }}</div>
+                <div class="text-gray-500 text-sm">Flights • Hotels • Resorts</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
