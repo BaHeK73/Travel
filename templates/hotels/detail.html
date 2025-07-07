@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="bg-blue-50 py-10">
+    <div class="max-w-6xl mx-auto px-4">
+        <!-- Галерея -->
+        {% if images %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {% for img in images %}
+                <img src="{{ img.image.url }}" alt="{{ img.alt }}" class="w-full h-56 object-cover rounded-xl shadow">
+            {% endfor %}
+        </div>
+        {% elif hotel.image %}
+        <div class="mb-8">
+            <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="w-full h-64 object-cover rounded-xl shadow">
+        </div>
+        {% endif %}
+        <!-- Заголовок и инфо -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold mb-1">{{ hotel.name }}</h1>
+                <div class="text-gray-600 mb-1">{{ hotel.city.name }}, {{ hotel.address }}</div>
+                <div class="flex items-center mb-1">
+                    <span class="text-yellow-400">{% for i in "12345"|slice:hotel.stars %}★{% endfor %}</span>
+                    <span class="ml-2 text-sm text-gray-500">({{ hotel.stars }} звёзд)</span>
+                    <span class="ml-4">Рейтинг: {{ hotel.rating }}</span>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-semibold">{{ hotel.reviews_count }} отзывов</span>
+            </div>
+        </div>
+        <!-- Табы -->
+        <div class="mb-8 border-b flex gap-8 text-lg">
+            <a href="#desc" class="py-2 px-4 hover:text-blue-600">Описание</a>
+            <a href="#rooms" class="py-2 px-4 hover:text-blue-600">Номера</a>
+            <a href="#reviews" class="py-2 px-4 hover:text-blue-600">Отзывы</a>
+        </div>
+        <!-- Описание -->
+        <div id="desc" class="mb-10">
+            <h2 class="text-2xl font-semibold mb-2">Описание</h2>
+            <div class="text-gray-700">{{ hotel.description }}</div>
+            <h3 class="text-xl font-semibold mt-6 mb-2">Удобства</h3>
+            <ul class="flex flex-wrap gap-2 mb-4">
+                {% for amenity in amenities %}
+                    <li class="bg-gray-100 px-3 py-1 rounded text-sm">{{ amenity.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- Номера -->
+        <div id="rooms" class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4">Доступные номера</h2>
+            {% if rooms %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for room in rooms %}
+                        <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+                            <div class="font-semibold text-lg mb-1">{{ room.room_type }}</div>
+                            <div class="text-sm text-gray-600 mb-1">Вместимость: {{ room.capacity }} гостей</div>
+                            <div class="mb-1">Цена: <span class="font-bold">{{ room.price_per_night }} ₽/ночь</span></div>
+                            {% if room.image %}
+                                <img src="{{ room.image.url }}" alt="{{ room.room_type }}" class="w-full h-24 object-cover rounded mb-2">
+                            {% endif %}
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mt-auto">Забронировать</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-gray-500">Нет доступных номеров.</div>
+            {% endif %}
+        </div>
+        <!-- Отзывы -->
+        <div id="reviews" class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4">Отзывы</h2>
+            {% if reviews %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {% for review in reviews %}
+                        <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-blue-600">{{ review.user.username|slice:':1'|upper }}</div>
+                                <div>
+                                    <div class="font-semibold">{{ review.user.username }}</div>
+                                    <div class="text-sm text-gray-500">{{ review.created_at|date:"d.m.Y" }}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-1">
+                                {% for i in "12345"|slice:review.rating %}
+                                    <span class="text-yellow-400">★</span>
+                                {% endfor %}
+                            </div>
+                            <div class="text-gray-700 mb-2">{{ review.text }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-gray-500">Пока нет отзывов.</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %} 

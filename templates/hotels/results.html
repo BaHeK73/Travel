@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6">Результаты поиска отелей</h1>
+    <form method="get" action="" class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded shadow">
+        {{ form.as_p }}
+        <div class="md:col-span-2 flex justify-end">
+            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Фильтровать</button>
+        </div>
+    </form>
+    {% if hotels %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for hotel in hotels %}
+        <div class="bg-white rounded shadow p-4 flex flex-col">
+            <a href="{% url 'hotels:detail' hotel.pk %}">
+                {% if hotel.image %}
+                    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="w-full h-48 object-cover rounded mb-2">
+                {% endif %}
+                <h2 class="text-xl font-semibold mb-1">{{ hotel.name }}</h2>
+            </a>
+            <div class="text-gray-600 mb-1">{{ hotel.city.name }}</div>
+            <div class="flex items-center mb-1">
+                <span class="text-yellow-400">{% for i in "12345"|slice:hotel.stars %}★{% endfor %}</span>
+                <span class="ml-2 text-sm text-gray-500">({{ hotel.stars }} звёзд)</span>
+            </div>
+            <div class="mb-1">Рейтинг: {{ hotel.rating }}</div>
+            <div class="mb-2 text-sm text-gray-500">{{ hotel.description|truncatewords:20 }}</div>
+            <div class="mt-auto">
+                <a href="{% url 'hotels:detail' hotel.pk %}" class="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Подробнее</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="text-gray-500">Нет отелей по выбранным критериям.</div>
+    {% endif %}
+</div>
+{% endblock %} 
