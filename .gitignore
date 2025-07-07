@@ -1,27 +1,6 @@
-# Python
-__pycache__/
-*.py[cod]
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-
 # Django
-*.log
-db.sqlite3
-media/
-staticfiles/
-
-# Virtual environment
-venv/
-
-# VSCode
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Env files
-.env 
+.idea
+node_modules
+/node_modules
+venv
+/venv
