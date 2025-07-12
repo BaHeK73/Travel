@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
     path('hotels/', include('Travel.apps.hotels.urls', namespace='hotels')),
+    path('users/', include('Travel.apps.users.urls')),
 ]
 
 if settings.DEBUG:

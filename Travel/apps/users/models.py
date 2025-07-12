@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from apps.flights.models import Flight
-from apps.hotels.models import Hotel
+from Travel.apps.flights.models import Flight
+from Travel.apps.hotels.models import Hotel
 
 
 class User(AbstractUser):

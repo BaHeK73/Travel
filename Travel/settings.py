@@ -13,12 +13,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Travel.apps.users',
     'Travel.apps.hotels',
     'Travel.apps.common',
     'Travel.apps.bookings',
     'Travel.apps.flights',
     'Travel.apps.newsletter',
     'Travel.apps.reviews',
+    'Travel.apps.blog',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
 LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'Europe/Moscow'

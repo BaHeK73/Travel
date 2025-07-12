@@ -10,6 +10,15 @@
 </head>
 <body>
     {% include 'partials/header.html' %}
+    {% if messages %}
+    <div class="max-w-xl mx-auto mt-4">
+        {% for message in messages %}
+            <div class="mb-2 px-4 py-2 rounded text-white {% if message.tags == 'success' %}bg-green-500{% elif message.tags == 'error' or message.tags == 'danger' %}bg-red-500{% else %}bg-blue-500{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <main>
         {% block content %}{% endblock content %}
     </main>
