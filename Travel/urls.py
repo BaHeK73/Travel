@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from Travel.apps.core.views import HomeView
+# from Travel.apps.core.views import HomeView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name='home'),
+    path('', include('Travel.apps.core.urls')),
     path('hotels/', include('Travel.apps.hotels.urls', namespace='hotels')),
     path('users/', include('Travel.apps.users.urls')),
 ]

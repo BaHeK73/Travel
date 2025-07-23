@@ -19,8 +19,8 @@
                     <a href="{% url 'logout' %}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-semibold hover:bg-gray-300">Выйти</a>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}" class="px-4 py-2 bg-white/80 text-blue-700 rounded font-semibold hover:bg-white">Вход</a>
-                <a href="{% url 'register' %}" class="px-4 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">Регистрация</a>
+                <a href="/users/api/login/" class="px-4 py-2 bg-white/80 text-blue-700 rounded font-semibold hover:bg-white">Вход</a>
+                <a href="/users/api/register/" class="px-4 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">Регистрация</a>
             {% endif %}
         </div>
     </nav>
